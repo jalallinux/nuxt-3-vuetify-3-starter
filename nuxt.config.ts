@@ -1,15 +1,18 @@
 import vuetify from "vite-plugin-vuetify";
 
-// PWA Config
-const title = "Vuetify 3 + Nuxt 3 Starter";
-const shortTitle = "Vuetify 3 + Nuxt 3 Starter";
-const description =
-  "Template to get you up and running with Nuxt 3 & Vuetify 3";
-const image = "http://localhost:3000/starter.png";
-const url = "http://localhost:3000/";
-
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+
+  runtimeConfig: {
+    // The private keys which are only available within server-side
+    // apiSecret: "123",
+
+    // Keys within public, will be also exposed to the client-side
+    public: {
+      appUrl: process.env.APP_URL || "localhost:3000",
+    }
+  },
+
   // import styles
   css: ["@/assets/main.scss"],
 
@@ -30,68 +33,68 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "Vuetify 3 + Nuxt 3 Starter",
+      title: process.env.APP_TITLE,
       // titleTemplate: "%s | Vuetify 3 + Nuxt 3 Starter",
       link: [
         { rel: "stylesheet", href: "https://rsms.me/inter/inter.css" },
         { rel: "preconnect", href: "https://rsms.me/" },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-        { rel: "canonical", href: url },
+        { rel: "canonical", href: process.env.APP_URL },
       ],
       meta: [
         {
           hid: "description",
           name: "description",
-          content: description,
+          content: process.env.APP_DESCRIPTION,
         },
-        { property: "og:site_name", content: title },
+        { property: "og:site_name", content: process.env.APP_TITLE },
         { hid: "og:type", property: "og:type", content: "website" },
         {
           hid: "og:url",
           property: "og:url",
-          content: url,
+          content: process.env.APP_URL,
         },
         {
           hid: "og:image:secure_url",
           property: "og:image:secure_url",
-          content: image,
+          content: process.env.APP_STARTER_IMAGE,
         },
         {
           hid: "og:title",
           property: "og:title",
-          content: title,
+          content: process.env.APP_TITLE,
         },
         {
           hid: "og:description",
           property: "og:description",
-          content: description,
+          content: process.env.APP_DESCRIPTION,
         },
         {
           hid: "og:image",
           property: "og:image",
-          content: image,
+          content: process.env.APP_STARTER_IMAGE,
         },
         //Twitter
         { name: "twitter:card", content: "summary_large_image" },
         {
           hid: "twitter:url",
           name: "twitter:url",
-          content: url,
+          content: process.env.APP_URL,
         },
         {
           hid: "twitter:title",
           name: "twitter:title",
-          content: title,
+          content: process.env.APP_TITLE,
         },
         {
           hid: "twitter:description",
           name: "twitter:description",
-          content: description,
+          content: process.env.APP_DESCRIPTION,
         },
         {
           hid: "twitter:image",
           name: "twitter:image",
-          content: image,
+          content: process.env.APP_STARTER_IMAGE,
         },
       ],
     },
@@ -99,16 +102,16 @@ export default defineNuxtConfig({
 
   pwa: {
     meta: {
-      name: shortTitle,
+      name: process.env.APP_SHORT_TITLE,
       author: "JalalLinuX",
       theme_color: "#4f46e5",
-      description: description,
+      description: process.env.APP_DESCRIPTION,
     },
     manifest: {
-      name: shortTitle,
-      short_name: shortTitle,
+      name: process.env.APP_SHORT_TITLE,
+      short_name: process.env.APP_SHORT_TITLE,
       theme_color: "#4f46e5",
-      description: description,
+      description: process.env.APP_DESCRIPTION,
     },
   },
 });
